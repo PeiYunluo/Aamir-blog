@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+
 Vue.use(Router)
 
 /* Layout */
@@ -51,7 +52,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: {title: 'Dashboard', icon: 'dashboard'}
     }]
   },
 
@@ -60,19 +61,19 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    meta: {title: 'Example', icon: 'example'},
     children: [
       {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: {title: 'Table', icon: 'table'}
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        meta: {title: 'Tree', icon: 'tree'}
       }
     ]
   },
@@ -85,11 +86,107 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: {title: 'Form', icon: 'form'}
+      }
+    ]
+  },
+  {
+    path: '/tag',
+    component: Layout,
+    redirect: '/views/tag/complex-table',
+    name: 'tag',
+    meta: {
+      title: 'tag',
+      icon: 'form'
+    },
+    children: [
+      {
+        path: '/tag/table',
+        component: () => import('@/views/tag/index'),
+        redirect: '/views/tag/complex-table',
+        name: 'tagTable',
+        meta: {
+          title: 'TagTable',
+          icon: 'table'
+        },
+        children: [
+          //compon ()=> import('@/views/form/index'),
+          //{ path: 'dynamic-table', component: _import('example/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
+          //{ path: 'drag-table', component: _import('example/table/dragTable'), name: 'dragTable', meta: { title: 'dragTable' }},
+          //{ path: 'inline-edit-table', component: _import('example/table/inlineEditTable'), name: 'inlineEditTable', meta: { title: 'inlineEditTable' }},
+          { path: 'complex-table',
+            component:()=> import('@/views/tag/complexTable'),
+            name: 'complexTable',
+            meta: { title: 'complexTable' }}
+        ]
       }
     ]
   },
 
+  {
+    path: '/Category',
+    component: Layout,
+    redirect: '/views/category/complex-table',
+    name: 'tag',
+    meta: {
+      title: 'category',
+      icon: 'table'
+    },
+    children: [
+      {
+        path: '/category/table',
+        component: () => import('@/views/category/index'),
+        redirect: '/views/category/complex-table',
+        name: 'categoryTable',
+        meta: {
+          title: 'CategoryTable',
+          icon: 'table'
+        },
+        children: [
+          //compon ()=> import('@/views/form/index'),
+          //{ path: 'dynamic-table', component: _import('example/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
+          //{ path: 'drag-table', component: _import('example/table/dragTable'), name: 'dragTable', meta: { title: 'dragTable' }},
+          //{ path: 'inline-edit-table', component: _import('example/table/inlineEditTable'), name: 'inlineEditTable', meta: { title: 'inlineEditTable' }},
+          { path: 'complex-table',
+            component:()=> import('@/views/category/complexTable'),
+            name: 'complexTable',
+            meta: { title: 'complexTable' }}
+        ]
+      }
+    ]
+  },
+  {
+    path: '/post',
+    component: Layout,
+    redirect: '/views/post/complex-table',
+    name: 'post',
+    meta: {
+      title: 'post',
+      icon: 'form'
+    },
+    children: [
+      {
+        path: '/post/table',
+        component: () => import('@/views/post/index'),
+        redirect: '/views/post/complex-table',
+        name: 'postTable',
+        meta: {
+          title: 'PostTable',
+          icon: 'table'
+        },
+        children: [
+          //compon ()=> import('@/views/form/index'),
+          //{ path: 'dynamic-table', component: _import('example/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
+          //{ path: 'drag-table', component: _import('example/table/dragTable'), name: 'dragTable', meta: { title: 'dragTable' }},
+          //{ path: 'inline-edit-table', component: _import('example/table/inlineEditTable'), name: 'inlineEditTable', meta: { title: 'inlineEditTable' }},
+          { path: 'complex-table',
+            component:()=> import('@/views/tag/complexTable'),
+            name: 'complexTable',
+            meta: { title: 'complexTable' }}
+        ]
+      }
+    ]
+  },
   {
     path: '/nested',
     component: Layout,
@@ -104,31 +201,31 @@ export const constantRoutes = [
         path: 'menu1',
         component: () => import('@/views/nested/menu1/index'), // Parent router-view
         name: 'Menu1',
-        meta: { title: 'Menu1' },
+        meta: {title: 'Menu1'},
         children: [
           {
             path: 'menu1-1',
             component: () => import('@/views/nested/menu1/menu1-1'),
             name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
+            meta: {title: 'Menu1-1'}
           },
           {
             path: 'menu1-2',
             component: () => import('@/views/nested/menu1/menu1-2'),
             name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
+            meta: {title: 'Menu1-2'},
             children: [
               {
                 path: 'menu1-2-1',
                 component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
                 name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
+                meta: {title: 'Menu1-2-1'}
               },
               {
                 path: 'menu1-2-2',
                 component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
                 name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
+                meta: {title: 'Menu1-2-2'}
               }
             ]
           },
@@ -136,14 +233,14 @@ export const constantRoutes = [
             path: 'menu1-3',
             component: () => import('@/views/nested/menu1/menu1-3'),
             name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
+            meta: {title: 'Menu1-3'}
           }
         ]
       },
       {
         path: 'menu2',
         component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
+        meta: {title: 'menu2'}
       }
     ]
   },
@@ -154,18 +251,18 @@ export const constantRoutes = [
     children: [
       {
         path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        meta: {title: 'External Link', icon: 'link'}
       }
     ]
   },
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {path: '*', redirect: '/404', hidden: true}
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 
