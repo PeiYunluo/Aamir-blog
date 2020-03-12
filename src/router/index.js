@@ -37,13 +37,11 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
   {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
-
   {
     path: '/',
     component: Layout,
@@ -55,7 +53,6 @@ export const constantRoutes = [
       meta: {title: 'Dashboard', icon: 'dashboard'}
     }]
   },
-
   {
     path: '/example',
     component: Layout,
@@ -77,7 +74,21 @@ export const constantRoutes = [
       }
     ]
   },
-
+  {
+    path: '/edit',
+    component: Layout,
+    redirect: '/views/edit/postedit',
+    name: 'edit',
+    meta: {title: 'edit', icon: 'example'},
+    children: [
+      {
+        path: 'index',
+        name: 'Table',
+        component: () => import('@/views/edit/index'),
+        meta: {title: 'Postedit', icon: 'table'}
+      }
+    ]
+  },
   {
     path: '/form',
     component: Layout,
@@ -110,11 +121,7 @@ export const constantRoutes = [
           icon: 'table'
         },
         children: [
-          //compon ()=> import('@/views/form/index'),
-          //{ path: 'dynamic-table', component: _import('example/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
-          //{ path: 'drag-table', component: _import('example/table/dragTable'), name: 'dragTable', meta: { title: 'dragTable' }},
-          //{ path: 'inline-edit-table', component: _import('example/table/inlineEditTable'), name: 'inlineEditTable', meta: { title: 'inlineEditTable' }},
-          { path: 'complex-table',
+         { path: 'complex-table',
             component:()=> import('@/views/tag/complexTable'),
             name: 'complexTable',
             meta: { title: 'complexTable' }}
@@ -122,7 +129,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
     path: '/Category',
     component: Layout,
@@ -143,11 +149,7 @@ export const constantRoutes = [
           icon: 'table'
         },
         children: [
-          //compon ()=> import('@/views/form/index'),
-          //{ path: 'dynamic-table', component: _import('example/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
-          //{ path: 'drag-table', component: _import('example/table/dragTable'), name: 'dragTable', meta: { title: 'dragTable' }},
-          //{ path: 'inline-edit-table', component: _import('example/table/inlineEditTable'), name: 'inlineEditTable', meta: { title: 'inlineEditTable' }},
-          { path: 'complex-table',
+             { path: 'complex-table',
             component:()=> import('@/views/category/complexTable'),
             name: 'complexTable',
             meta: { title: 'complexTable' }}
@@ -244,7 +246,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
     path: 'external-link',
     component: Layout,
@@ -255,7 +256,6 @@ export const constantRoutes = [
       }
     ]
   },
-
   // 404 page must be placed at the end !!!
   {path: '*', redirect: '/404', hidden: true}
 ]
