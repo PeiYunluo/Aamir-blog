@@ -41,7 +41,7 @@
         <template slot="prepend">自定义路径</template>
       </el-input>
       <hr>
-      <el-lable> 标签 ：</el-lable>
+      <el-lable> 标签:</el-lable>
       <el-select v-model="tags" multiple placeholder="请选择">
         <el-option
           v-for="item in options1"
@@ -50,7 +50,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-lable> 分类 ：</el-lable>
+      <el-lable> 分类:</el-lable>
       <el-select v-model="categories" multiple placeholder="请选择">
         <el-option
           v-for="item in options2"
