@@ -272,3 +272,14 @@ export function getVersion(name) {
     return p.dependencies[name]
   })
 }
+export function timeconvert(time) {
+  let date = new Date(time);
+  formatObj.Y = date.getFullYear() + '-';
+  formatObj.M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+  formatObj.D = date.getDate() + ' ';
+  formatObj.h = date.getHours() + ':';
+  formatObj.m = date.getMinutes() + ':';
+  formatObj.s = date.getSeconds();
+  console.log(formatObj.Y+formatObj.M+formatObj.D+formatObj.h+formatObj.m+formatObj.s); //呀麻碟
+  return formatObj.Y+formatObj.M+formatObj.D+formatObj.h+formatObj.m+formatObj.s
+}

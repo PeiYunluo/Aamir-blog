@@ -107,7 +107,7 @@ export const constantRoutes = [
     redirect: '/views/tag/complex-table',
     name: 'tag',
     meta: {
-      title: 'tag',
+      title: 'Tag',
       icon: 'form'
     },
     children: [
@@ -123,8 +123,8 @@ export const constantRoutes = [
         children: [
          { path: 'complex-table',
             component:()=> import('@/views/tag/complexTable'),
-            name: 'complexTable',
-            meta: { title: 'complexTable' }}
+            name: 'TagTable',
+            meta: { title: 'TagTable' }}
         ]
       }
     ]
@@ -133,9 +133,9 @@ export const constantRoutes = [
     path: '/Category',
     component: Layout,
     redirect: '/views/category/complex-table',
-    name: 'tag',
+    name: 'Category',
     meta: {
-      title: 'category',
+      title: 'Category',
       icon: 'table'
     },
     children: [
@@ -143,7 +143,7 @@ export const constantRoutes = [
         path: '/category/table',
         component: () => import('@/views/category/index'),
         redirect: '/views/category/complex-table',
-        name: 'categoryTable',
+        name: 'CategoryTable',
         meta: {
           title: 'CategoryTable',
           icon: 'table'
@@ -151,8 +151,8 @@ export const constantRoutes = [
         children: [
              { path: 'complex-table',
             component:()=> import('@/views/category/complexTable'),
-            name: 'complexTable',
-            meta: { title: 'complexTable' }}
+            name: 'CategoryTable',
+            meta: { title: 'CategoryTable' }}
         ]
       }
     ]
@@ -163,7 +163,7 @@ export const constantRoutes = [
     redirect: '/views/post/complex-table',
     name: 'post',
     meta: {
-      title: 'post',
+      title: 'Post',
       icon: 'form'
     },
     children: [
@@ -177,14 +177,10 @@ export const constantRoutes = [
           icon: 'table'
         },
         children: [
-          //compon ()=> import('@/views/form/index'),
-          //{ path: 'dynamic-table', component: _import('example/table/dynamicTable/index'), name: 'dynamicTable', meta: { title: 'dynamicTable' }},
-          //{ path: 'drag-table', component: _import('example/table/dragTable'), name: 'dragTable', meta: { title: 'dragTable' }},
-          //{ path: 'inline-edit-table', component: _import('example/table/inlineEditTable'), name: 'inlineEditTable', meta: { title: 'inlineEditTable' }},
           { path: 'complex-table',
-            component:()=> import('@/views/tag/complexTable'),
+            component:()=> import('@/views/post/complexTable'),
             name: 'complexTable',
-            meta: { title: 'complexTable' }}
+            meta: { title: 'PostTable' }}
         ]
       }
     ]

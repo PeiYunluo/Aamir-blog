@@ -126,6 +126,7 @@
     created() {
       this.inittags();
       this.initcategories();
+      //this.initpost
     }
     ,
     methods: {

@@ -7,3 +7,11 @@ export function creatpost(data) {
     data
   })
 }
+
+export function getposts(query) {
+  return request({
+    url: '/post/list',
+    method: 'get',
+    params: query
+  })
+}
