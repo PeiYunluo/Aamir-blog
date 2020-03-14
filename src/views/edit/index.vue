@@ -1,12 +1,10 @@
 <!--
 <template>
-
   <div class="app-container">
     <h2>what's this</h2>
     <editor/>
   </div>
 </template>
-
 <script>
   //import { Editor } from '@toast-ui/vue-editor';
   import {Editor} from  "../../components/tui-editor/"
@@ -76,6 +74,29 @@
     <el-button @click="OnSave"
                style="width:10%;margin-bottom:30px;">保存
     </el-button>
+
+    <el-drawer
+      title="我是标题"
+      :visible.sync="drawer"
+      :with-header="false">
+      <h3 align="center">我来啦!</h3>
+      <div>
+        <el-upload action="https://upload.qbox.me" :data="dataObj" drag :multiple="true" :before-upload="beforeUpload"
+                   :on-success="uploadSuccess">
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        </el-upload>
+      </div>
+
+      <span id="foo" v-if="dataObj.key!=''">{{url+"/"+dataObj.key}}</span>
+      <el-button v-if="dataObj.key!=''" class="copyBtn" @click="handleCopy">Copy</el-button>
+      <img :src="url+'/'+dataObj.key+'?imageView2/1/w/320/h/180'" />
+    </el-drawer>
+
+
+    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+      点我打开
+    </el-button>
   </div>
 
 </template>
@@ -85,6 +106,9 @@
   import {creatpost, getPostbyid} from '@/api/post'
   import {getAlltags} from '@/api/tag'
   import {getAllcategoies} from '@/api/category'
+  import {getToken} from '@/api/qiniu'
+
+
 
   export default {
     name: "markdown",
@@ -94,6 +118,11 @@
     props: {},
     data() {
       return {
+        url: "http://q6yuglcls.bkt.clouddn.com",
+        dataObj: {token: '', key: ''},
+        image_uri: [],
+        fileList: [],
+        drawer: false,
         radio: 0,
         value: undefined,
         defaultData: "preview",
@@ -212,6 +241,31 @@
             console.log(vm.PostSaveParam);
           })
         }
+
+      },
+      beforeUpload(file) {
+        console.log("+++++++++++++++++++++++++++++" + file.name);
+        const _self = this
+        return new Promise((resolve, reject) => {
+          getToken().then(response => {
+            console.log(response.data.data);
+            const key = response.data.data.key
+            const token = response.data.data.token
+            _self.dataObj.token = token
+            _self.dataObj.key = key
+            resolve(true)
+          }).catch(err => {
+            console.log(err)
+            reject(false)
+          })
+        })
+      },
+      uploadSuccess(response, file, fileList) {
+        console.log(response);
+        console.log(file.name);
+        console.log(fileList);
+      },
+      handleCopy(){
 
       }
     },

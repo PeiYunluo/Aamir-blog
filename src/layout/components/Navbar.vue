@@ -2,6 +2,7 @@
   <div class="navbar">
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
+
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
@@ -25,10 +26,13 @@
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">Log Out</span>
           </el-dropdown-item>
+
         </el-dropdown-menu>
       </el-dropdown>
     </div>
+
   </div>
+
 </template>
 
 <script>
@@ -37,6 +41,11 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 
 export default {
+  data(){
+    return{
+
+    }
+  },
   components: {
     Breadcrumb,
     Hamburger

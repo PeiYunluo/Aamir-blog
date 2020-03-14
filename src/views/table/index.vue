@@ -1,80 +1,65 @@
 <template>
   <div class="app-container">
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-    >
-      <el-table-column align="center" label="ID" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Title">
-        <template slot-scope="scope">
-          {{ scope.row.title }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.pageviews }}
-        </template>
-      </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
-        </template>
-      </el-table-column>
-    </el-table>
+   <el-card v-for="item in urllist">
+     <img :src="src+item+'?imageView2/1/w/320/h/180'" />
+   </el-card>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
+  import {getAllphotos} from '@/api/qiniu'
 
-export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
+  export default {
+
+    data() {
+      return {
+        src: "http://q6yuglcls.bkt.clouddn.com/",
+        urllist: []
       }
-      return statusMap[status]
-    }
-  },
-  data() {
-    return {
-      list: null,
-      listLoading: true
-    }
-  },
-  created() {
-    this.fetchData()
-  },
-  methods: {
-    fetchData() {
-      this.listLoading = true
-      getList().then(response => {
-        console.log(response);
-        this.list = response.data.items
-        this.listLoading = false
-      })
+    },
+    created() {
+      this.initphotos()
+    },
+    methods: {
+      initphotos() {
+        let vm = this
+        getAllphotos().then(response => {
+          //console.log(response);
+          vm.urllist = response.data.data
+          console.log(vm.urllist)
+        })
+      }
     }
   }
-}
 </script>
+<style>
+  .time {
+    font-size: 13px;
+    color: #999;
+  }
+
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+
+  .button {
+    padding: 0;
+    float: right;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+
+  .clearfix:after {
+    clear: both
+  }
+</style>

@@ -166,7 +166,7 @@
         </el-form-item>
         <el-form-item label="缩略图">
           <el-input v-model="temp.thumbnailurl"></el-input>
-          <img :src="temp.thumbnailurl+'?imageView2/1/w/40/h/40'">
+          <el-image :src="temp.thumbnailurl+'?imageView2/1/w/40/h/40'"/>
         </el-form-item>
         <el-form-item label="概述">
           <el-input v-model="temp.summary"></el-input>

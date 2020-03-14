@@ -4,6 +4,7 @@
       <router-view :key="key" />
     </transition>
   </section>
+
 </template>
 
 <script>
