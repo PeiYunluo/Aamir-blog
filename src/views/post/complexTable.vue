@@ -49,7 +49,7 @@
           <div>
             <span class="link-type">{{scope.row.title}}</span>
             <el-link icon="el-icon-edit" @click="handleUpdate(scope.row)" style="color: #1482f0">编辑</el-link>
-            <el-link style="color: #FEC171">查看<i class="el-icon-view el-icon--right" style="color: #FEC171"></i>
+            <el-link style="color: #FEC171" @click="clickByRouter(scope.row.id)">查看<i class="el-icon-view el-icon--right" style="color: #FEC171"></i>
             </el-link>
           </div>
           <!--<el-tag>{{'CN' | typeFilter}}</el-tag>-->
@@ -122,8 +122,7 @@
         <template slot-scope="scope">
           <el-button v-if="scope.row.status!=0" size="small" type="danger" @click="handlestatusswitch(scope.row)">草稿接口
           </el-button>
-          <el-button v-if="scope.row.status!=1" size="small" type="success" @click="handlestatusswitch(scope.row)">
-            发布接口
+          <el-button v-if="scope.row.status!=1" size="small" type="success" @click="handlestatusswitch(scope.row)">发布接口
           </el-button>
         </template>
       </el-table-column>
@@ -284,8 +283,8 @@
           url: '',
           thumbnailurl: '',
           summary: '',
-          tagsid: [1],
-          categoriesid: [1]
+          tagsid: [],
+          categoriesid: []
           //status:undefined
         },
         sortOptions: [{label: '按ID升序列', key: '+id'}, {label: '按ID降序', key: '-id'}],
@@ -416,6 +415,9 @@
           }
 
         })
+      },
+      clickByRouter(id){
+        this.$router.push({path:'/edit/index',query:{"id":id}})
       },
       handlestatusswitch(row) {
         statusswitch(row).then(response => {

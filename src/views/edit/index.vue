@@ -21,14 +21,12 @@
     },
   }
 </script>
-
 <style scoped>
-
 </style>
 -->
 <template>
   <div class="app-container">
-    <el-input placeholder="请输入内容" v-model="PostSaveParam.categoriesid">
+    <el-input placeholder="请输入内容" v-model="PostSaveParam.summary">
       <template slot="prepend">前言</template>
     </el-input>
     <hr>
@@ -41,7 +39,7 @@
         <template slot="prepend">自定义路径</template>
       </el-input>
       <hr>
-      <el-lable> 标签:</el-lable>
+      <span> 标签:</span>
       <el-select v-model="tags" multiple placeholder="请选择">
         <el-option
           v-for="item in options1"
@@ -50,7 +48,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-lable> 分类:</el-lable>
+      <span> 分类:</span>
       <el-select v-model="categories" multiple placeholder="请选择">
         <el-option
           v-for="item in options2"
@@ -65,12 +63,6 @@
         <el-radio :label="2">备选项</el-radio>
       </el-radio-group>
       <hr>
-      <el-form-item label="单选">
-        <el-select placeholder="please select your zone">
-          <el-option label="Zone one" value="shanghai"/>
-          <el-option label="Zone two" value="beijing"/>
-        </el-select>
-      </el-form-item>
       <el-form-item label="不允许评论">
         <el-switch v-model="PostSaveParam.disallowComment"/>
       </el-form-item>
@@ -90,7 +82,7 @@
 
 <script>
   import {MarkdownPro} from 'vue-meditor'
-  import {creatpost} from '@/api/post'
+  import {creatpost, getPostbyid} from '@/api/post'
   import {getAlltags} from '@/api/tag'
   import {getAllcategoies} from '@/api/category'
 
@@ -102,15 +94,15 @@
     props: {},
     data() {
       return {
-        radio:0,
-        value: 'hello aamir',
+        radio: 0,
+        value: undefined,
         defaultData: "preview",
         options1: [],
         options2: [],
         tags: [],
         categories: [],
         PostSaveParam: {
-          id: '',
+          id: undefined,
           title: '',
           status: 0,
           url: '',
@@ -118,17 +110,23 @@
           summary: '',
           disallowComment: false,
           deleted: false,
-          tagsid: [1],
-          categoriesid: [1],
+          tagsid: [],
+          categoriesid: [],
+
         }
       }
     },
     created() {
+      this.getParams();
+
       this.inittags();
       this.initcategories();
+      this.initpost();
       //this.initpost
-    }
-    ,
+    },
+    watch: {
+      '$route': 'getParams'
+    },
     methods: {
       handleOnSave({value, theme}) {
         console.log(value, theme);
@@ -159,35 +157,64 @@
       inittags() {
         let vm = this
         getAlltags().then(reponse => {
-          console.log(reponse);
-          console.log(reponse.data.data[0]);
+          //console.log(reponse);
+          //console.log(reponse.data.data[0]);
           for (let i = 0; i < reponse.data.data.length; i++) {
-            console.log(reponse.data.data[i].id)
-            console.log(reponse.data.data[i].name);
-            console.log(vm.options1);
+            //console.log(reponse.data.data[i].id)
+            //console.log(reponse.data.data[i].name);
+            //console.log(vm.options1);
             vm.options1[i] = ({value: reponse.data.data[i].id, label: reponse.data.data[i].name});
-            console.log(vm.options1);
+            //console.log(vm.options1);
             //强制重新渲染
             this.$forceUpdate();
           }
+          console.log(vm.options1);
         })
       },
       initcategories() {
         let vm = this
         getAllcategoies().then(reponse => {
-          console.log(reponse);
-          console.log(reponse.data.data[0]);
+          //console.log(reponse);
+          //console.log(reponse.data.data[0]);
           for (let i = 0; i < reponse.data.data.length; i++) {
-            console.log(reponse.data.data[i].id)
-            console.log(reponse.data.data[i].categroyname);
-            console.log(vm.options2);
+            //console.log(reponse.data.data[i].id)
+            //console.log(reponse.data.data[i].categroyname);
+            //console.log(vm.options2);
             vm.options2[i] = ({value: reponse.data.data[i].id, label: reponse.data.data[i].categroyname});
-            console.log(vm.options2);
+            //console.log(vm.options2);
             //强制重新渲染
             this.$forceUpdate();
           }
+          console.log(vm.options2);
         })
       },
-    }
+      getParams() {
+        this.PostSaveParam.id = this.$route.query.id
+        //console.log(this.PostSaveParam.id);
+      },
+      initpost() {
+        let vm = this
+        if (this.$route.query.id !== undefined) {
+          getPostbyid({"id": this.$route.query.id}).then(response => {
+            //console.log(response);
+            vm.PostSaveParam.id = response.data.data.id
+            vm.PostSaveParam.title = response.data.data.title
+            vm.PostSaveParam.status = response.data.data.status
+            vm.PostSaveParam.url = response.data.data.url
+            vm.PostSaveParam.originalContent = response.data.data.originalContent
+            vm.PostSaveParam.summary = response.data.data.summary
+            vm.PostSaveParam.disallowComment = response.data.data.disallowComment
+            vm.PostSaveParam.deleted = response.data.data.deleted
+            vm.PostSaveParam.tagsid = response.data.data.tagsid
+            vm.PostSaveParam.categoriesid = response.data.data.categoriesid
+            vm.tags = response.data.data.tagsid
+            vm.categories = response.data.data.categoriesid
+            console.log(vm.PostSaveParam);
+          })
+        }
+
+      }
+    },
+
   }
 </script>

@@ -55,11 +55,19 @@ export function updatePost(data) {
     data
   })
 }
-statusswitch
+
 export function statusswitch(data) {
   return request({
     url: '/post/statusswitch',
     method: 'post',
     data
+  })
+}
+
+export function getPostbyid(id) {
+  return request({
+    url: '/post/getPostbyid',
+    method: 'get',
+    params: id
   })
 }
