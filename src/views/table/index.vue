@@ -13,6 +13,8 @@
 
     data() {
       return {
+
+        //TODO:从后端获取该链接
         src: "http://q6yuglcls.bkt.clouddn.com/",
         urllist: []
       }

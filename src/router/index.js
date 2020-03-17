@@ -54,24 +54,32 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/example',
+    path: '/misc',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: {title: 'Example', icon: 'example'},
+    redirect: '/misc/table',
+    name: 'Misc',
+    meta: {title: 'Misc', icon: 'example'},
     children: [
       {
-        path: 'table',
+        path: '/phototable',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: {title: 'Table', icon: 'table'}
+        meta: {title: 'Photo', icon: 'table'}
       },
-      {
+      { path: '/linktable',
+        component:()=> import('@/views/link/complexTable'),
+        name: 'LinkTable',
+        meta: { title: 'LinkTable', icon: 'table' }},
+      { path: '/optiontable',
+        component:()=> import('@/views/configoption/complexTable'),
+        name: 'OptionTable',
+        meta: { title: 'OptionTable' , icon: 'table'}}
+    /*  {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: {title: 'Tree', icon: 'tree'}
-      }
+      }*/
     ]
   },
   {
@@ -107,7 +115,7 @@ export const constantRoutes = [
     redirect: '/views/tag/complex-table',
     name: 'tag',
     meta: {
-      title: 'Tag',
+      title: 'Tag&Category',
       icon: 'form'
     },
     children: [
@@ -117,19 +125,23 @@ export const constantRoutes = [
         redirect: '/views/tag/complex-table',
         name: 'tagTable',
         meta: {
-          title: 'TagTable',
+          title: 'Tables',
           icon: 'table'
         },
         children: [
-         { path: 'complex-table',
+         { path: '/Tag/complex-table',
             component:()=> import('@/views/tag/complexTable'),
             name: 'TagTable',
-            meta: { title: 'TagTable' }}
+            meta: { title: 'TagTable' }},
+          { path: '/Category/complex-table',
+            component:()=> import('@/views/category/complexTable'),
+            name: 'CategoryTable',
+            meta: { title: 'CategoryTable' }}
         ]
       }
     ]
   },
-  {
+  /*{
     path: '/Category',
     component: Layout,
     redirect: '/views/category/complex-table',
@@ -156,7 +168,7 @@ export const constantRoutes = [
         ]
       }
     ]
-  },
+  },*/
   {
     path: '/post',
     component: Layout,
@@ -173,14 +185,18 @@ export const constantRoutes = [
         redirect: '/views/post/complex-table',
         name: 'postTable',
         meta: {
-          title: 'PostTable',
+          title: 'Tables',
           icon: 'table'
         },
         children: [
           { path: 'complex-table',
             component:()=> import('@/views/post/complexTable'),
             name: 'complexTable',
-            meta: { title: 'PostTable' }}
+            meta: { title: 'PostTable' }},
+          { path: '/comment/complex-table',
+            component:()=> import('@/views/comment/complexTable'),
+            name: 'complexTable',
+            meta: { title: 'CommentTable' }}
         ]
       }
     ]

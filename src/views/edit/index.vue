@@ -1,27 +1,3 @@
-<!--
-<template>
-  <div class="app-container">
-    <h2>what's this</h2>
-    <editor/>
-  </div>
-</template>
-<script>
-  //import { Editor } from '@toast-ui/vue-editor';
-  import {Editor} from  "../../components/tui-editor/"
-  export default {
-    name: "index",
-    components: {
-      'editor': Editor
-    },
-    data() {
-      return {
-      };
-    },
-  }
-</script>
-<style scoped>
-</style>
--->
 <template>
   <div class="app-container">
     <el-input placeholder="请输入内容" v-model="PostSaveParam.summary">
@@ -79,26 +55,27 @@
       title="我是标题"
       :visible.sync="drawer"
       :with-header="false">
-      <h3 align="center">我来啦!</h3>
+      <h3 align="center">图片上传</h3>
       <div>
-        <el-upload action="https://upload.qbox.me" :data="dataObj" drag :multiple="true" :before-upload="beforeUpload"
+        <el-upload action="https://upload.qbox.me" :data="dataObj" drag :multiple="true" :before-upload="beforeUpload" align="center"
                    :on-success="uploadSuccess">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         </el-upload>
       </div>
 
-      <span id="foo" v-if="dataObj.key!=''">{{url+"/"+dataObj.key}}</span>
-      <el-button v-if="dataObj.key!=''" class="copyBtn" @click="handleCopy">Copy</el-button>
-      <img :src="url+'/'+dataObj.key+'?imageView2/1/w/320/h/180'" />
+      <el-tabs>
+        <el-tab-pane label="Copy and Paste" name="directly">
+          <el-input v-model="url+'/'+dataObj.key" placeholder="请输入内容" style='width:200px;'></el-input>
+          <el-button type="primary" icon="document" @click='handleCopy(url+"/"+dataObj.key,$event)'>copy</el-button>
+        </el-tab-pane>
+        <img v-if="dataObj.key!=''" :src="url+'/'+dataObj.key+'?imageView2/1/w/320/h/180'" />
+      </el-tabs>
     </el-drawer>
-
-
-    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+    <el-button @click="drawer = true" type="primary" style="margin-left: 30px;">
       点我打开
     </el-button>
   </div>
-
 </template>
 
 <script>
@@ -107,6 +84,8 @@
   import {getAlltags} from '@/api/tag'
   import {getAllcategoies} from '@/api/category'
   import {getToken} from '@/api/qiniu'
+  import clip from '@/utils/clipboard' // use clipboard directly
+  import clipboard from '@/directive/clipboard/index.js' // use clipboard by v-directive
 
 
 
@@ -115,14 +94,23 @@
     components: {
       MarkdownPro
     },
+    directives: {
+      clipboard
+    },
     props: {},
     data() {
       return {
+        //
+
+        //上传
         url: "http://q6yuglcls.bkt.clouddn.com",
         dataObj: {token: '', key: ''},
         image_uri: [],
         fileList: [],
+        //抽屉
         drawer: false,
+        //copy
+
         radio: 0,
         value: undefined,
         defaultData: "preview",
@@ -141,7 +129,6 @@
           deleted: false,
           tagsid: [],
           categoriesid: [],
-
         }
       }
     },
@@ -265,8 +252,15 @@
         console.log(file.name);
         console.log(fileList);
       },
-      handleCopy(){
-
+      handleCopy(text, event) {
+        clip(text, event)
+      },
+      clipboardSuccess() {
+        this.$message({
+          message: '复制成功',
+          type: 'success',
+          duration: 1500
+        })
       }
     },
 
