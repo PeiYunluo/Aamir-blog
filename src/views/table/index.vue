@@ -1,5 +1,15 @@
 <template>
   <div class="app-container">
+    <el-upload
+      action="https://jsonplaceholder.typicode.com/posts/"
+      list-type="picture-card"
+      :on-preview="handlePictureCardPreview"
+      :on-remove="handleRemove">
+      <i class="el-icon-plus"></i>
+    </el-upload>
+    <el-dialog :visible.sync="dialogVisible">
+      <img width="100%" :src="dialogImageUrl" alt="">
+    </el-dialog>
    <el-card v-for="item in urllist">
      <img :src="src+item+'?imageView2/1/w/320/h/180'" />
    </el-card>
@@ -13,6 +23,8 @@
 
     data() {
       return {
+        dialogImageUrl: '',
+        dialogVisible: false,
 
         //TODO:从后端获取该链接
         src: "http://q6yuglcls.bkt.clouddn.com/",
@@ -30,6 +42,13 @@
           vm.urllist = response.data.data
           console.log(vm.urllist)
         })
+      },
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
       }
     }
   }

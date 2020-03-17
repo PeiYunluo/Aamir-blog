@@ -1,6 +1,6 @@
 <template>
-  <el-row class="panel-group" :gutter="40">
-    <el-col :span="6">
+  <el-row class="panel-group" :gutter="20">
+    <el-col :span="4">
       <div class='card-panel' @click="handleSetLineChartData('newVisitis')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
@@ -11,35 +11,46 @@
         </div>
       </div>
     </el-col>
-    <el-col :span="6">
+    <el-col :span="4">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
         <div class="card-panel-icon-wrapper icon-message">
           <svg-icon icon-class="message" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">Messages</div>
+          <div class="card-panel-text">Posts</div>
           <count-to class="card-panel-num" :startVal="0" :endVal="81212" :duration="4000"></count-to>
         </div>
       </div>
     </el-col>
-    <el-col :span="6">
+    <el-col :span="4">
       <div class="card-panel" @click="handleSetLineChartData('purchases')">
         <div class="card-panel-icon-wrapper icon-money">
           <svg-icon icon-class="money" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">Purchases</div>
+          <div class="card-panel-text">Tags</div>
           <count-to class="card-panel-num" :startVal="0" :endVal="9280" :duration="4000"></count-to>
         </div>
       </div>
     </el-col>
-    <el-col :span="6">
+    <el-col :span="4">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-shoppingCard">
           <svg-icon icon-class="shoppingCard" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">Shoppings</div>
+          <div class="card-panel-text">Categories</div>
+          <count-to class="card-panel-num" :startVal="0" :endVal="13600" :duration="4600"></count-to>
+        </div>
+      </div>
+    </el-col>
+    <el-col :span="4">
+      <div class="card-panel" @click="handleSetLineChartData('shoppings')">
+        <div class="card-panel-icon-wrapper icon-shoppingCard">
+          <svg-icon icon-class="shoppingCard" class-name="card-panel-icon" />
+        </div>
+        <div class="card-panel-description">
+          <div class="card-panel-text">Notifications</div>
           <count-to class="card-panel-num" :startVal="0" :endVal="13600" :duration="4600"></count-to>
         </div>
       </div>
