@@ -35,3 +35,24 @@ export function getInfobytoken(token) {
     params:{token}
   })
 }
+export function getUserInfo() {
+  return request({
+    url: '/user/getUserInfo',
+    method: 'get',
+  })
+}
+export function updateUserInfo(data) {
+  return request({
+    url: '/user/updateUserInfo',
+    method: 'post',
+    data
+  })
+}
+
+export function resetPassword(data) {
+  return request({
+    url: '/user/resetPassword',
+    method: 'post',
+    data
+  })
+}

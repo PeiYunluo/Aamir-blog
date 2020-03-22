@@ -7,51 +7,51 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">New Visits</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="102400" :duration="3600"></count-to>
+          <count-to class="card-panel-num" :startVal="0" :endVal="countsvisit" :duration="3600"></count-to>
         </div>
       </div>
     </el-col>
     <el-col :span="4">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
         <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="message" class-name="card-panel-icon" />
+          <svg-icon icon-class="table" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Posts</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="81212" :duration="4000"></count-to>
+          <count-to class="card-panel-num" :startVal="0" :endVal="countposts" :duration="4000"></count-to>
         </div>
       </div>
     </el-col>
     <el-col :span="4">
       <div class="card-panel" @click="handleSetLineChartData('purchases')">
         <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon" />
+          <svg-icon icon-class="table" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Tags</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="9280" :duration="4000"></count-to>
+          <count-to class="card-panel-num" :startVal="0" :endVal="counttags" :duration="4000"></count-to>
         </div>
       </div>
     </el-col>
     <el-col :span="4">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-shoppingCard">
-          <svg-icon icon-class="shoppingCard" class-name="card-panel-icon" />
+          <svg-icon icon-class="table" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Categories</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="13600" :duration="4600"></count-to>
+          <count-to class="card-panel-num" :startVal="0" :endVal="countcategories" :duration="4600"></count-to>
         </div>
       </div>
     </el-col>
     <el-col :span="4">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-shoppingCard">
-          <svg-icon icon-class="shoppingCard" class-name="card-panel-icon" />
+          <svg-icon icon-class="message" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Notifications</div>
-          <count-to class="card-panel-num" :startVal="0" :endVal="13600" :duration="4600"></count-to>
+          <count-to class="card-panel-num" :startVal="0" :endVal="countnotifica" :duration="4600"></count-to>
         </div>
       </div>
     </el-col>
@@ -60,14 +60,47 @@
 
 <script>
 import CountTo from 'vue-count-to'
+import {countsposts,countstags,countscategories,countsvisits,countsnotifications} from '@/api/others'
 
 export default {
+  data() {
+    return{
+      countposts:undefined,
+      counttags:undefined,
+      countcategories:undefined,
+      countsvisit:undefined,
+      countnotifica:undefined
+    }
+  },
+  created() {
+    this.initdata()
+  },
+
   components: {
     CountTo
   },
   methods: {
     handleSetLineChartData(type) {
       this.$emit('handleSetLineChartData', type)
+    },
+    initdata(){
+      let vm =this
+
+      countsposts().then(response =>{
+        vm.countposts = response.data.data
+      })
+      countstags().then(response =>{
+        vm.counttags = response.data.data
+      })
+      countscategories().then(response =>{
+        vm.countcategories = response.data.data
+      })
+      countsvisits().then(response =>{
+        vm.countsvisit = response.data.data
+      })
+      countsnotifications().then(response =>{
+        vm.countnotifica = response.data.data
+      })
     }
   }
 }

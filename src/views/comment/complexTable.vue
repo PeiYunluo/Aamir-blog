@@ -17,7 +17,7 @@
       <el-checkbox class="filter-item" style='margin-left:15px;' v-model="isstripe">显示斑马条纹</el-checkbox>
       <el-button class="filter-item" style='margin-left:15px;' @click="HandleQuerydeleted">未删除</el-button>
       <el-button class="filter-item" style='margin-left:15px;'>待审核</el-button>
-      <el-button class="filter-item" style='margin-left:15px;'>通知项目</el-button>
+      <el-button class="filter-item" style='margin-left:15px;' @click="clear">通知项目</el-button>
 
     </div>
 
@@ -135,7 +135,8 @@
     addComment,
     switchnotificationbyid,
     switchstatus,
-    deletecomment
+    deletecomment,
+    clearNotification
   } from '@/api/comment'
 
 
@@ -267,7 +268,19 @@
 
         })
       },
-
+      clear(){
+        let vm =this
+        clearNotification().then(response =>{
+          if (response.data.resultCode == 200){
+            this.$notify({
+              title: '成功',
+              message: '操作成功',
+              type: 'success',
+              duration: 2000
+            })
+          }
+        })
+      },
       HandleStatus(row) {
         this.$forceUpdate()
         switchstatus(row).then(response => {

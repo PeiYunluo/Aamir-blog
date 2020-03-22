@@ -8,7 +8,10 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <el-badge :value=countnotifica class="item">
+            <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          </el-badge>
+
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -17,10 +20,10 @@
               Home
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
+          <a target="_blank" href="https://github.com/PeiYunluo">
             <el-dropdown-item>Github</el-dropdown-item>
           </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
+          <a target="_blank" href="https://github.com/PeiYunluo">
             <el-dropdown-item>Docs</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
@@ -39,11 +42,12 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import {countsnotifications} from '@/api/others'
 
 export default {
   data(){
     return{
-
+      countnotifica:undefined
     }
   },
   components: {
@@ -56,6 +60,9 @@ export default {
       'avatar'
     ])
   },
+  created() {
+    this.initdata()
+  },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
@@ -63,6 +70,12 @@ export default {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    initdata(){
+      let vm =this
+      countsnotifications().then(response =>{
+        vm.countnotifica = response.data.data
+      })
     }
   }
 }

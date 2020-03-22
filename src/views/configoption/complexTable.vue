@@ -72,14 +72,14 @@
       </el-table-column>
 
     </el-table>
-    <div v-show="!listLoading" class="pagination-container">
+ <!--   <div v-show="!listLoading" class="pagination-container">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                      :current-page.sync="listQuery.page"
                      :page-sizes="[1,2,5]" :page-size="listQuery.limit"
                      layout="total, sizes, prev, pager, next, jumper"
                      :total="total">
       </el-pagination>
-    </div>
+    </div>-->
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px"

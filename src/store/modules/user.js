@@ -35,6 +35,9 @@ const actions = {
     const {username, password} = userInfo
     return new Promise((resolve, reject) => {
       logintoken({username: username.trim(), password: password}).then(response => {
+        if (response.data.resultCode==401){
+          alert("登录失败")
+        }
         const {data} = response
         console.log(data);
         console.log(data.data.address);

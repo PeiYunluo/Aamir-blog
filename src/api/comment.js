@@ -61,3 +61,10 @@ export function deletecomment(data) {
     data
   })
 }
+
+export function clearNotification() {
+  return request({
+    url: '/comment/clearNotification',
+    method: 'get',
+  })
+}

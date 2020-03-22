@@ -105,7 +105,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: {title: 'Form', icon: 'form'}
+        meta: {title: 'ME', icon: 'form'}
       }
     ]
   },
@@ -201,7 +201,7 @@ export const constantRoutes = [
       }
     ]
   },
-  {
+  /*{
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
@@ -257,14 +257,14 @@ export const constantRoutes = [
         meta: {title: 'menu2'}
       }
     ]
-  },
+  },*/
   {
     path: 'external-link',
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: {title: 'External Link', icon: 'link'}
+        path: 'https://github.com/PeiYunluo',
+        meta: {title: 'GITHUB', icon: 'link'}
       }
     ]
   },

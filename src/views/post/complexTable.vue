@@ -4,15 +4,7 @@
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签"
                 @input="change($event)" v-model="listQuery.name"/>
 
-      <!-- <el-select clearable style="width: 90px" class="filter-item" v-model="listQuery.importance" placeholder="重要性">
-         <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item">
-         </el-option>
-       </el-select>-->
 
-      <!--<el-select clearable class="filter-item" style="width: 130px" v-model="listQuery.type" placeholder="类型">
-        <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.display_name+'('+item.key+')'" :value="item.key">
-        </el-option>
-      </el-select>-->
 
       <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.sort"
                  placeholder="排序">
@@ -131,7 +123,7 @@
     <div v-show="!listLoading" class="pagination-container">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                      :current-page.sync="listQuery.page"
-                     :page-sizes="[1,2,5,10,20]" :page-size="listQuery.limit"
+                     :page-size="listQuery.limit"
                      layout="total, sizes, prev, pager, next, jumper"
                      :total="total">
       </el-pagination>
