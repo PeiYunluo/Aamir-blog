@@ -41,8 +41,10 @@
         <el-switch v-model="PostSaveParam.disallowComment"/>
       </el-form-item>
       <MarkdownPro @on-save="handleOnSave"
-                   :height="600" theme="light"
+                   :height="800" theme="light"
                     value="Hello Aamir"
+                   :bordered="false"
+                   :toolbars="{importmd:false}"
                    v-model="PostSaveParam.originalContent"/>
     </el-form>
     <el-button type="primary" @click="onSubmit">Create</el-button>
@@ -71,6 +73,35 @@
         </el-tab-pane>
         <img v-show="dataObj.key!=''" :src="url.configvalue+dataObj.key+'?imageView2/1/w/320/h/180'" />
       </el-tabs>
+
+      <h3 align="center">Md文章上传</h3>
+      <div>
+        <el-upload action="http://localhost:8090/photo/uploadmarkdown"  drag :multiple="true" :before-upload="beforeUpload" align="center"
+                   :on-success="uploadSuccess">
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        </el-upload>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </el-drawer>
     <el-button @click="drawer = true" type="primary" style="margin-left: 30px;">
       点我打开
@@ -154,7 +185,6 @@
         let vm = this
         findOption(vm.option).then(response=>{
           vm.url = response.data.data
-          console.log(vm.responseurl);
         })
       },
       handleOnSave({value, theme}) {
@@ -186,12 +216,7 @@
       inittags() {
         let vm = this
         getAlltags().then(reponse => {
-          //console.log(reponse);
-          //console.log(reponse.data.data[0]);
           for (let i = 0; i < reponse.data.data.length; i++) {
-            //console.log(reponse.data.data[i].id)
-            //console.log(reponse.data.data[i].name);
-            //console.log(vm.options1);
             vm.options1[i] = ({value: reponse.data.data[i].id, label: reponse.data.data[i].name});
             //console.log(vm.options1);
             //强制重新渲染
@@ -203,23 +228,17 @@
       initcategories() {
         let vm = this
         getAllcategoies().then(reponse => {
-          //console.log(reponse);
-          //console.log(reponse.data.data[0]);
           for (let i = 0; i < reponse.data.data.length; i++) {
-            //console.log(reponse.data.data[i].id)
-            //console.log(reponse.data.data[i].categroyname);
-            //console.log(vm.options2);
             vm.options2[i] = ({value: reponse.data.data[i].id, label: reponse.data.data[i].categroyname});
             //console.log(vm.options2);
             //强制重新渲染
             this.$forceUpdate();
           }
-          console.log(vm.options2);
+          //console.log(vm.options2);
         })
       },
       getParams() {
         this.PostSaveParam.id = this.$route.query.id
-        //console.log(this.PostSaveParam.id);
       },
       initpost() {
         let vm = this
@@ -238,7 +257,7 @@
             vm.PostSaveParam.categoriesid = response.data.data.categoriesid
             vm.tags = response.data.data.tagsid
             vm.categories = response.data.data.categoriesid
-            console.log(vm.PostSaveParam);
+            //console.log(vm.PostSaveParam);
           })
         }
 
@@ -248,7 +267,7 @@
         const _self = this
         return new Promise((resolve, reject) => {
           getToken().then(response => {
-            console.log(response.data.data);
+            //console.log(response.data.data);
             const key = response.data.data.key
             const token = response.data.data.token
             _self.dataObj.token = token
@@ -261,9 +280,19 @@
         })
       },
       uploadSuccess(response, file, fileList) {
+        let vm =this
+        vm.PostSaveParam.originalContent = response.data
+        this.$message({
+          message: '上传成功',
+          type: 'success',
+          duration: 1500
+        })
+/*        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        console.log(vm.PostSaveParam.originalContent);
+        console.log(response.data);
         console.log(response);
         console.log(file.name);
-        console.log(fileList);
+        console.log(fileList);*/
       },
       handleCopy(text, event) {
         clip(text, event)
