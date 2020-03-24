@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-upload
-      action="https://jsonplaceholder.typicode.com/posts/"
+      action="http://localhost:8090/photo/uploadFile"
       list-type="picture-card"
       :on-preview="handlePictureCardPreview"
       :on-remove="handleRemove">
@@ -10,14 +10,57 @@
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="">
     </el-dialog>
-   <el-card v-for="item in urllist">
-     <img :src="src+item+'?imageView2/1/w/320/h/180'" />
-   </el-card>
+
+
+<!--    <img :src="responselocalurl.configvalue+'photo.png'"/>-->
+    <div class="post-lists">
+      <div class="post-lists-body">
+        <div class="post-title"># 七牛云</div>
+        <div class="post-list-item" v-for="item in urllist" @click="PicturePreviewQiniu(item)">
+          <div class="post-list-item-container">
+            <div class="item-thumb bg-deepgrey"
+                 :style="{backgroundImage:'url('+responseurl.configvalue+item+')'}"></div>
+            <a>
+              <div class="item-desc"><p>{{responseurl.configvalue+item}}</p>
+              </div>
+            </a>
+            <div class="item-slant reverse-slant bg-deepgrey"></div>
+            <div class="item-slant"></div>
+            <div class="item-label">
+              <div class="item-title"><a>图片名字</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="post-title"># 本地</div>
+        <div class="post-list-item" v-for="item in list" @click="PicturePreview(item)">
+          <div class="post-list-item-container">
+            <div class="item-thumb bg-deepgrey"
+                 :style="{backgroundImage:'url('+responselocalurl.configvalue+item+')'}"></div>
+            <a>
+              <div class="item-desc">
+                <p>{{responselocalurl.configvalue+item}}</p>
+              </div>
+            </a>
+            <div class="item-slant reverse-slant bg-deepgrey"></div>
+            <div class="item-slant"></div>
+            <div class="item-label">
+              <div class="item-title"><a>图片名字</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 </template>
 
 <script>
-  import {getAllphotos} from '@/api/qiniu'
+  import {getAllphotos, uploadFile, getAlllocalphotos} from '@/api/qiniu'
+  import {findOption} from '@/api/option'
+  // import clip from '@/utils/clipboard' // use clipboard directly
+  // import clipboard from '@/directive/clipboard/index.js' // use clipboard by v-directive
 
   export default {
 
@@ -25,22 +68,62 @@
       return {
         dialogImageUrl: '',
         dialogVisible: false,
+        option: {
+          configfield: "Qiniu",
+          configname: "url",
+          configvalue: undefined
+        },
+        optionlocal: {
+          configfield: "Local",
+          configname: "BaseURL",
+          configvalue: undefined
+        },
+        responseurl: undefined,
+        responselocalurl: undefined,
+
 
         //TODO:从后端获取该链接
         src: "http://q6yuglcls.bkt.clouddn.com/",
-        urllist: []
+        urllist: [],
+        list: [],
       }
     },
     created() {
+      this.initQiniuUrl()
+      this.initLocalUrl()
       this.initphotos()
+      this.initlocalphotos()
     },
     methods: {
       initphotos() {
         let vm = this
         getAllphotos().then(response => {
-          //console.log(response);
           vm.urllist = response.data.data
-          console.log(vm.urllist)
+          console.log(vm.urllist);
+        })
+      },
+      handleCopy(text, event) {
+        clip(text, event)
+      },
+      initlocalphotos() {
+        let vm = this
+        getAlllocalphotos().then(response => {
+          vm.list = response.data.data
+          console.log(vm.list);
+        })
+      },
+      initQiniuUrl() {
+        let vm = this
+        findOption(vm.option).then(response => {
+          vm.responseurl = response.data.data
+          console.log(vm.responseurl);
+        })
+      },
+      initLocalUrl() {
+        let vm = this
+        findOption(vm.optionlocal).then(response => {
+          vm.responselocalurl = response.data.data
+          console.log(vm.responselocalurl);
         })
       },
       handleRemove(file, fileList) {
@@ -48,6 +131,15 @@
       },
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
+        console.log(this.dialogImageUrl);
+        this.dialogVisible = true;
+      },
+      PicturePreview(item){
+        this.dialogImageUrl = this.responselocalurl.configvalue+item
+        this.dialogVisible = true;
+      },
+      PicturePreviewQiniu(item){
+        this.dialogImageUrl = this.responseurl.configvalue+item
         this.dialogVisible = true;
       }
     }

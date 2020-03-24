@@ -42,7 +42,7 @@
       </el-form-item>
       <MarkdownPro @on-save="handleOnSave"
                    :height="600" theme="light"
-                   initialValue="Hello Aamir"
+                    value="Hello Aamir"
                    v-model="PostSaveParam.originalContent"/>
     </el-form>
     <el-button type="primary" @click="onSubmit">Create</el-button>
@@ -66,10 +66,10 @@
 
       <el-tabs>
         <el-tab-pane label="Copy and Paste" name="directly">
-          <el-input v-model="url+'/'+dataObj.key" placeholder="请输入内容" style='width:200px;'></el-input>
-          <el-button type="primary" icon="document" @click='handleCopy(url+"/"+dataObj.key,$event)'>copy</el-button>
+          <el-input v-model="url.configvalue+dataObj.key" placeholder="请输入内容" style='width:200px;'></el-input>
+          <el-button type="primary" icon="document" @click='handleCopy(url.configvalue+dataObj.key,$event)'>copy</el-button>
         </el-tab-pane>
-        <img v-if="dataObj.key!=''" :src="url+'/'+dataObj.key+'?imageView2/1/w/320/h/180'" />
+        <img v-show="dataObj.key!=''" :src="url.configvalue+dataObj.key+'?imageView2/1/w/320/h/180'" />
       </el-tabs>
     </el-drawer>
     <el-button @click="drawer = true" type="primary" style="margin-left: 30px;">
@@ -86,6 +86,7 @@
   import {getToken} from '@/api/qiniu'
   import clip from '@/utils/clipboard' // use clipboard directly
   import clipboard from '@/directive/clipboard/index.js' // use clipboard by v-directive
+  import {findOption} from '@/api/option'
 
 
 
@@ -103,13 +104,18 @@
         //
 
         //上传
-        url: "http://q6yuglcls.bkt.clouddn.com",
+        url:undefined,
         dataObj: {token: '', key: ''},
         image_uri: [],
         fileList: [],
         //抽屉
         drawer: false,
         //copy
+        option:{
+          configfield:"Qiniu",
+          configname:"url",
+          configvalue:undefined
+        },
 
         radio: 0,
         value: undefined,
@@ -134,7 +140,7 @@
     },
     created() {
       this.getParams();
-
+      this.initQiniuUrl();
       this.inittags();
       this.initcategories();
       this.initpost();
@@ -144,6 +150,13 @@
       '$route': 'getParams'
     },
     methods: {
+      initQiniuUrl(){
+        let vm = this
+        findOption(vm.option).then(response=>{
+          vm.url = response.data.data
+          console.log(vm.responseurl);
+        })
+      },
       handleOnSave({value, theme}) {
         console.log(value, theme);
       },

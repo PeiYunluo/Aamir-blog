@@ -13,3 +13,18 @@ export function getAllphotos() {
     method: 'get'
   })
 }
+
+
+export function uploadFile() {
+  return request({
+    url: '/photo/uploadFile', // 假地址 自行替换
+    method: 'get'
+  })
+}
+
+export function getAlllocalphotos() {
+  return request({
+    url: '/photo/qiniu/getAlllocalphotos', // 假地址 自行替换
+    method: 'get'
+  })
+}

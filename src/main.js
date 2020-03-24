@@ -2,10 +2,17 @@ import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
+import stylemin from '@/styles/style.min.scss'
+
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 import clipboard from 'clipboard';
+
+
+import formatDate from './utils/formatDate'
+// 注册为全局过滤器
+Vue.filter('formatDate', formatDate)
 //注册到vue原型上
 Vue.prototype.clipboard = clipboard;
 

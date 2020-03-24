@@ -21,17 +21,17 @@ service.interceptors.request.use(
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       //TODO 将数据从store转移到cookie 或 本地存储等
-      console.log("=================================================================================")
+/*      console.log("=================================================================================")
       console.log(store.getters.token)
       console.log(getToken())
-      console.log("=================================================================================")
+      console.log("=================================================================================")*/
       config.headers['token'] = store.getters.token
     }
     return config
   },
   error => {
     // do something with request error
-    console.log(error) // for debug
+   /* console.log(error) // for debug*/
     return Promise.reject(error)
   }
 )

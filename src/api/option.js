@@ -16,4 +16,12 @@ export function editOption(data) {
     data
   })
 }
+//找到一个option
+export function findOption(data) {
+  return request({
+    url: '/aamirconfig/findOption',
+    method: 'post',
+    data
+  })
+}
 
