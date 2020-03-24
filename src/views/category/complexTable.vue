@@ -3,16 +3,6 @@
     <div class="filter-container">
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签" @input="change($event)" v-model="listQuery.name"/>
 
-      <!-- <el-select clearable style="width: 90px" class="filter-item" v-model="listQuery.importance" placeholder="重要性">
-         <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item">
-         </el-option>
-       </el-select>-->
-
-      <!--<el-select clearable class="filter-item" style="width: 130px" v-model="listQuery.type" placeholder="类型">
-        <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.display_name+'('+item.key+')'" :value="item.key">
-        </el-option>
-      </el-select>-->
-
       <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.sort"
                  placeholder="排序">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
@@ -45,11 +35,9 @@
 
       <el-table-column min-width="100px" label="标题">
         <template slot-scope="scope">
-
           <span class="link-type">{{scope.row.categroyname}}</span>
           <el-button type="primary" @click="handleUpdate(scope.row)" size="small" style="margin-left:50px;"> 编辑
           </el-button>
-          <!--<el-tag>{{'CN' | typeFilter}}</el-tag>-->
         </template>
       </el-table-column>
       <el-table-column min-width="100px" label="标题">
@@ -57,7 +45,6 @@
 
           <span class="link-type">{{scope.row.description}}</span>
 
-          <!--<el-tag>{{'CN' | typeFilter}}</el-tag>-->
         </template>
       </el-table-column>
 
@@ -80,34 +67,10 @@
               </template>
             </el-table-column>
 
-      <!--    <el-table-column label="重要性">
-          <template slot-scope="scope">
-            <svg-icon v-for="n in +scope.row.id" icon-class="star" class="meta-item__icon" :key="n"></svg-icon>
-          </template>
-        </el-table-column>-->
-
-      <!--   <el-table-column align="center" label="阅读数" width="95">
-           <template slot-scope="scope">
-             <span class="link-type">&lt;!&ndash;@click='handleFetchPv(scope.row.id)'&ndash;&gt;{{scope.row.id}}</span>
-           </template>
-         </el-table-column>-->
-
-      <!--   <el-table-column class-name="status-col" label="状态" width="100">
-           <template slot-scope="scope">
-             <el-tag :type="scope.row.id | statusFilter">{{scope.row.id}}</el-tag>
-           </template>
-         </el-table-column>-->
 
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <!--<el-button v-if="scope.row.name!=true" size="small" type="success">发布
-            &lt;!&ndash;@click="handleModifyStatus(scope.row,'published')"&ndash;&gt;
-          </el-button>
-          <el-button v-if="scope.row.name!=true" size="small">草稿接口
-            &lt;!&ndash; @click="handleModifyStatus(scope.row,'draft')"&ndash;&gt;
-          </el-button>-->
           <el-button v-if="scope.row.deleted!=true" size="small" type="danger">删除接口
-            <!-- @click="handleModifyStatus(scope.row,'deleted')"-->
           </el-button>
         </template>
       </el-table-column>
@@ -125,24 +88,6 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px"
                style='width: 400px; margin-left:50px;'>
-        <!--         <el-form-item label="类型">
-                   <el-select class="filter-item" v-model="temp.type" placeholder="请选择">
-                     <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key">
-                     </el-option>
-                   </el-select>
-                 </el-form-item>
-
-                 <el-form-item label="状态">
-                   <el-select class="filter-item" v-model="temp.status" placeholder="请选择">
-                     <el-option v-for="item in  statusOptions" :key="item" :label="item" :value="item">
-                     </el-option>
-                   </el-select>
-                 </el-form-item>
-
-                 <el-form-item label="时间">
-                   <el-date-picker v-model="temp.timestamp" type="datetime" placeholder="选择日期时间">
-                   </el-date-picker>
-                 </el-form-item>-->
         <el-form-item label="标签名">
           <el-input v-model="temp.categroyname"></el-input>
         </el-form-item>
@@ -221,7 +166,7 @@
         listLoading: true,
         listQuery: {
           page: 1,
-          limit: 2,
+          limit: 10,
           sort: '+id',
         },
         temp: {

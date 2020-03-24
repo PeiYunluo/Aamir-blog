@@ -82,26 +82,6 @@
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         </el-upload>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </el-drawer>
     <el-button @click="drawer = true" type="primary" style="margin-left: 30px;">
       点我打开

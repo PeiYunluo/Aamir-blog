@@ -2,18 +2,18 @@
   <div class="dashboard-container">
     <h2 align="center">Hello Aamir</h2>
     <panel-group @handleSetLineChartData="handleSetLineChartData"></panel-group>
-
+<!--
     <el-row style="margin-top:30px;background:#fff;padding:15px 15px 0;">
       <line-chart :chart-data="lineChartData"></line-chart>
-    </el-row>
+    </el-row>-->
 
-    <el-upload action="https://upload.qbox.me" :data="dataObj" drag :multiple="true" :before-upload="beforeUpload"
+  <!--  <el-upload action="https://upload.qbox.me" :data="dataObj" drag :multiple="true" :before-upload="beforeUpload"
                :on-success="uploadSuccess">
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-    </el-upload>
+    </el-upload>-->
 
-    <todo-list style="margin:0 8px;"></todo-list>
+<!--    <todo-list style="margin:0 8px;"></todo-list>-->
   </div>
 </template>
 

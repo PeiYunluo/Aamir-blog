@@ -37,12 +37,6 @@
         </template>
       </el-table-column>
 
-      <!-- <el-table-column width="180px" align="center" label="时间">
-         <template slot-scope="scope">
-           <span>{{scope.row.updateTime}}</span>
-         </template>
-       </el-table-column>-->
-
       <el-table-column min-width="100px" label="标题">
         <template slot-scope="scope">
 
@@ -66,43 +60,11 @@
           </el-switch>
         </template>
       </el-table-column>
-      <!--
 
-            <el-table-column width="110px" v-if='showAuditor' align="center" label="审核人">
-              <template slot-scope="scope">
-                <span style='color:red;'>{{scope.row.name}}</span>
-              </template>
-            </el-table-column>
-      -->
-
-      <!--    <el-table-column label="重要性">
-          <template slot-scope="scope">
-            <svg-icon v-for="n in +scope.row.id" icon-class="star" class="meta-item__icon" :key="n"></svg-icon>
-          </template>
-        </el-table-column>-->
-
-      <!--   <el-table-column align="center" label="阅读数" width="95">
-           <template slot-scope="scope">
-             <span class="link-type">&lt;!&ndash;@click='handleFetchPv(scope.row.id)'&ndash;&gt;{{scope.row.id}}</span>
-           </template>
-         </el-table-column>-->
-
-      <!--   <el-table-column class-name="status-col" label="状态" width="100">
-           <template slot-scope="scope">
-             <el-tag :type="scope.row.id | statusFilter">{{scope.row.id}}</el-tag>
-           </template>
-         </el-table-column>-->
 
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <!--<el-button v-if="scope.row.name!=true" size="small" type="success">发布
-            &lt;!&ndash;@click="handleModifyStatus(scope.row,'published')"&ndash;&gt;
-          </el-button>
-          <el-button v-if="scope.row.name!=true" size="small">草稿接口
-            &lt;!&ndash; @click="handleModifyStatus(scope.row,'draft')"&ndash;&gt;
-          </el-button>-->
           <el-button v-if="scope.row.deleted!=true" size="small" type="danger">删除接口
-            <!-- @click="handleModifyStatus(scope.row,'deleted')"-->
           </el-button>
         </template>
       </el-table-column>
@@ -111,7 +73,7 @@
     <div v-show="!listLoading" class="pagination-container">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
                      :current-page.sync="listQuery.page"
-                     :page-sizes="[1,2,5]" :page-size="listQuery.limit"
+                     :page-sizes="[1,2,5,10]" :page-size="listQuery.limit"
                      layout="total, sizes, prev, pager, next, jumper"
                      :total="total">
       </el-pagination>
@@ -120,35 +82,12 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px"
                style='width: 400px; margin-left:50px;'>
-        <!--         <el-form-item label="类型">
-                   <el-select class="filter-item" v-model="temp.type" placeholder="请选择">
-                     <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key">
-                     </el-option>
-                   </el-select>
-                 </el-form-item>
 
-                 <el-form-item label="状态">
-                   <el-select class="filter-item" v-model="temp.status" placeholder="请选择">
-                     <el-option v-for="item in  statusOptions" :key="item" :label="item" :value="item">
-                     </el-option>
-                   </el-select>
-                 </el-form-item>
-
-                 <el-form-item label="时间">
-                   <el-date-picker v-model="temp.timestamp" type="datetime" placeholder="选择日期时间">
-                   </el-date-picker>
-                 </el-form-item>-->
         <el-form-item label="标签名">
           <el-input v-model="temp.name"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="重要性">
-          <el-rate style="margin-top:8px;" v-model="temp.importance" :colors="['#99A9BF', '#F7BA2A', '#FF9900']" :max='3'></el-rate>
-        </el-form-item>-->
-        <!--
-        <el-form-item label="点评">
-          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="temp.remark">
-          </el-input>
-        </el-form-item>-->
+
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -157,37 +96,13 @@
       </div>
     </el-dialog>
 
-    <!--  <el-dialog title="阅读数统计" :visible.sync="dialogPvVisible">
-        <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-          <el-table-column prop="key" label="渠道"> </el-table-column>
-          <el-table-column prop="pv" label="pv"> </el-table-column>
-        </el-table>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="dialogPvVisible = false">确 定</el-button>
-        </span>
-      </el-dialog>-->
 
   </div>
 </template>
 
 <script>
-  //import {fetchList, fetchPv} from '@/api/article'
   import waves from '@/directive/waves/index.js' // 水波纹指令
-  // import { timeconvert } from '@/utils'
   import {gettaglist,addTag,updateTagname,deleteTag} from '@/api/tag'
-
-  // const calendarTypeOptions = [
-  //   {key: 'CN', display_name: '中国'},
-  //   {key: 'US', display_name: '美国'},
-  //   {key: 'JP', display_name: '日本'},
-  //   {key: 'EU', display_name: '欧元区'}
-  // ]
-  //
-  // // arr to obj
-  // const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-  //   acc[cur.key] = cur.display_name
-  //   return acc
-  // }, {})
 
   export default {
     name: 'complexTable',
@@ -201,15 +116,13 @@
         listLoading: true,
         listQuery: {
           page: 1,
-          limit: 2,
+          limit: 10,
           sort: '+id',
         },
         temp: {
           id: undefined,
           name: ''
         },
-        //importanceOptions: [1, 2, 3],
-        // calendarTypeOptions,
         sortOptions: [{label: '按ID升序列', key: '+id'}, {label: '按ID降序', key: '-id'}],
         statusOptions: ['published', 'draft', 'deleted'],
         dialogFormVisible: false,

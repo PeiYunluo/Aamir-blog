@@ -44,19 +44,17 @@
             <el-link style="color: #FEC171" @click="clickByRouter(scope.row.id)">查看<i class="el-icon-view el-icon--right" style="color: #FEC171"></i>
             </el-link>
           </div>
-          <!--<el-tag>{{'CN' | typeFilter}}</el-tag>-->
         </template>
       </el-table-column>
       <el-table-column min-width="100px" label="概述">
         <template slot-scope="scope">
           <span class="link-type">{{scope.row.summary}}</span>
-          <!--<el-tag>{{'CN' | typeFilter}}</el-tag>-->
         </template>
       </el-table-column>
       <el-table-column min-width="25px" label="数量">
         <template slot-scope="scope">
           <span class="link-type">{{scope.row.visits}}</span>
-          <!--<el-tag>{{'CN' | typeFilter}}</el-tag>-->
+
         </template>
       </el-table-column>
 
@@ -89,7 +87,7 @@
 
       <el-table-column width="110px" align="center" label="缩略图">
         <template slot-scope="scope">
-          <span style='color:red;'><img :src="scope.row.thumbnailurl+'?imageView2/1/w/40/h/40'"></span>
+          <span style='color:red;'><img :src="scope.row.thumbnailurl+'?imageView2/1/w/40/h/40'" height="40" width="40"></span>
         </template>
       </el-table-column>
 
