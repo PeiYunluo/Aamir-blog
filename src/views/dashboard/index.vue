@@ -1,7 +1,42 @@
 <template>
   <div class="dashboard-container">
     <h2 align="center">Hello Aamir</h2>
-    <panel-group @handleSetLineChartData="handleSetLineChartData"></panel-group>
+    <panel-group></panel-group>
+
+    <el-tooltip :content="'Switch value: ' + value" placement="top">
+      <el-switch
+        v-model="emailvalue"
+        active-color="#13ce66"
+        inactive-color="#ff4949"
+        active-value="TURE"
+        inactive-value="FALSE"
+      @click="handleemail">
+      </el-switch>
+    </el-tooltip>
+
+
+    <el-tooltip :content="'Switch value: ' + value" placement="top">
+      <el-switch
+        v-model="uploadvalue"
+        active-color="#13ce66"
+        inactive-color="#ff4949"
+        active-value="TURE"
+        inactive-value="FALSE"
+        @click="handleupload">
+      </el-switch>
+    </el-tooltip>
+
+
+    <el-tooltip :content="'Switch value: ' + value" placement="top">
+      <el-switch
+        v-model="notificationvalue"
+        active-color="#13ce66"
+        inactive-color="#ff4949"
+        active-value="TURE"
+        inactive-value="FALSE"
+        @click="handlenotification">
+      </el-switch>
+    </el-tooltip>
 <!--
     <el-row style="margin-top:30px;background:#fff;padding:15px 15px 0;">
       <line-chart :chart-data="lineChartData"></line-chart>
@@ -59,6 +94,9 @@
 
     data() {
       return {
+        emailvalue: 'FALSE',
+        uploadvalue: 'FALSE',
+        notificationvalue: 'FALSE',
         currentDate: new Date(),
 
         dataObj: {token: '', key: ''},
@@ -95,6 +133,15 @@
         console.log(file.name);
         //console.log("3++++++++++++++++++++++++++++++++=");
         console.log(fileList);
+      },
+      handleemail(){
+
+      },
+      handleupload(){
+
+      },
+      handlenotification(){
+
       }
     }
   }

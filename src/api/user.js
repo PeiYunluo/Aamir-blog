@@ -56,3 +56,11 @@ export function resetPassword(data) {
     data
   })
 }
+
+export function forgotPassword(data) {
+  return request({
+    url: '/user/forgotPassword',
+    method: 'post',
+    data
+  })
+}

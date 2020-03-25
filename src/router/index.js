@@ -38,6 +38,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/resetPassword',
+    component: () => import('@/views/resetpwd/index'),
+    hidden: true
+  },
+  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
@@ -74,12 +79,6 @@ export const constantRoutes = [
         component:()=> import('@/views/configoption/complexTable'),
         name: 'OptionTable',
         meta: { title: 'OptionTable' , icon: 'table'}}
-    /*  {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: {title: 'Tree', icon: 'tree'}
-      }*/
     ]
   },
   {
@@ -141,34 +140,6 @@ export const constantRoutes = [
       }
     ]
   },
-  /*{
-    path: '/Category',
-    component: Layout,
-    redirect: '/views/category/complex-table',
-    name: 'Category',
-    meta: {
-      title: 'Category',
-      icon: 'table'
-    },
-    children: [
-      {
-        path: '/category/table',
-        component: () => import('@/views/category/index'),
-        redirect: '/views/category/complex-table',
-        name: 'CategoryTable',
-        meta: {
-          title: 'CategoryTable',
-          icon: 'table'
-        },
-        children: [
-             { path: 'complex-table',
-            component:()=> import('@/views/category/complexTable'),
-            name: 'CategoryTable',
-            meta: { title: 'CategoryTable' }}
-        ]
-      }
-    ]
-  },*/
   {
     path: '/post',
     component: Layout,

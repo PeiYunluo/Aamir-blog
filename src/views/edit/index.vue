@@ -267,12 +267,6 @@
           type: 'success',
           duration: 1500
         })
-/*        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-        console.log(vm.PostSaveParam.originalContent);
-        console.log(response.data);
-        console.log(response);
-        console.log(file.name);
-        console.log(fileList);*/
       },
       handleCopy(text, event) {
         clip(text, event)

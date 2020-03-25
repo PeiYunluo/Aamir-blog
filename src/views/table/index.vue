@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
+    <!--TODO:后端获取项目地址-->
     <el-upload
-      action="http://localhost:8090/photo/uploadFile"
+      action="http://192.168.124.8:8090/photo/uploadFile"
       list-type="picture-card"
       :on-preview="handlePictureCardPreview"
       :on-remove="handleRemove">
@@ -11,8 +12,6 @@
       <img width="100%" :src="dialogImageUrl" alt="">
     </el-dialog>
 
-
-<!--    <img :src="responselocalurl.configvalue+'photo.png'"/>-->
     <div class="post-lists">
       <div class="post-lists-body">
         <div class="post-title"># 七牛云</div>
@@ -59,8 +58,6 @@
 <script>
   import {getAllphotos, uploadFile, getAlllocalphotos} from '@/api/qiniu'
   import {findOption} from '@/api/option'
-  // import clip from '@/utils/clipboard' // use clipboard directly
-  // import clipboard from '@/directive/clipboard/index.js' // use clipboard by v-directive
 
   export default {
 
