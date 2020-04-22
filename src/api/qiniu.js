@@ -28,3 +28,10 @@ export function getAlllocalphotos() {
     method: 'get'
   })
 }
+
+export function getAllAliOssphotos() {
+  return request({
+    url: '/photo/AliOss/getAllAliOssphotos', // 假地址 自行替换
+    method: 'get'
+  })
+}

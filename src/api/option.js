@@ -25,3 +25,10 @@ export function findOption(data) {
   })
 }
 
+export function switches(data) {
+  return request({
+    url: '/aamirconfig/switches',
+    method: 'post',
+    data
+  })
+}

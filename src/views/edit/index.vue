@@ -48,10 +48,10 @@
                    v-model="PostSaveParam.originalContent"/>
     </el-form>
     <el-button type="primary" @click="onSubmit">Create</el-button>
-    <el-button @click="onCancel">Cancel</el-button>
+<!--    <el-button @click="onCancel">Cancel</el-button>
     <el-button @click="OnSave"
                style="width:10%;margin-bottom:30px;">保存
-    </el-button>
+    </el-button>-->
 
     <el-drawer
       title="我是标题"
@@ -59,7 +59,7 @@
       :with-header="false">
       <h3 align="center">图片上传</h3>
       <div>
-        <el-upload action="https://upload.qbox.me" :data="dataObj" drag :multiple="true" :before-upload="beforeUpload" align="center"
+        <el-upload v-if="aamirUploadOption.configvalue === 'TRUE'" action="https://upload.qbox.me" :data="dataObj" drag :multiple="true" :before-upload="beforeUpload" align="center"
                    :on-success="uploadSuccess">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -112,8 +112,12 @@
     props: {},
     data() {
       return {
-        //
-
+        //开关
+        aamirUploadOption:{
+          configfield:"Qiniu",
+          configname:"upload",
+          configvalue:undefined
+        },
         //上传
         url:undefined,
         dataObj: {token: '', key: ''},
@@ -152,6 +156,7 @@
     created() {
       this.getParams();
       this.initQiniuUrl();
+      this.initOption();
       this.inittags();
       this.initcategories();
       this.initpost();
@@ -161,6 +166,12 @@
       '$route': 'getParams'
     },
     methods: {
+      initOption(){
+        let vm = this
+        findOption(this.aamirUploadOption).then(response=>{
+          vm.aamirUploadOption.configvalue = response.data.data.configvalue
+        })
+      },
       initQiniuUrl(){
         let vm = this
         findOption(vm.option).then(response=>{
@@ -247,7 +258,6 @@
         const _self = this
         return new Promise((resolve, reject) => {
           getToken().then(response => {
-            //console.log(response.data.data);
             const key = response.data.data.key
             const token = response.data.data.token
             _self.dataObj.token = token
