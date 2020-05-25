@@ -1,8 +1,8 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签" @input="change($event)" v-model="listQuery.name"/>
-
+     <!-- <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签" @input="change($event)" v-model="listQuery.name"/>
+-->
       <!-- <el-select clearable style="width: 90px" class="filter-item" v-model="listQuery.importance" placeholder="重要性">
          <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item">
          </el-option>

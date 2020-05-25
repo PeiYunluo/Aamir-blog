@@ -1,7 +1,7 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签"
+<!--      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签"
                 @input="change($event)" v-model="listQuery.name"/>
       <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.sort"
                  placeholder="排序">
@@ -9,7 +9,7 @@
         </el-option>
       </el-select>
 
-      <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>-->
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
                  icon="el-icon-edit">添加
       </el-button>

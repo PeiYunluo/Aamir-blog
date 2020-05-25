@@ -1,7 +1,7 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签"
+   <!--   <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签"
                 @input="change($event)" v-model="listQuery.name"/>
 
 
@@ -10,14 +10,14 @@
                  placeholder="排序">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
         </el-option>
-      </el-select>
+      </el-select>-->
 
-      <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>
+ <!--     <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>-->
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
                  icon="el-icon-edit">添加
       </el-button>
       <!--      <el-button class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">导出</el-button>-->
-      <el-button class="filter-item" type="primary" icon="el-icon-download">导出</el-button>
+      <!--<el-button class="filter-item" type="primary" icon="el-icon-download">导出</el-button>-->
       <el-checkbox class="filter-item" style='margin-left:15px;' v-model="isstripe">显示斑马条纹</el-checkbox>
     </div>
 
@@ -130,24 +130,6 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form class="small-space" :model="temp" label-position="left" label-width="70px"
                style='width: 400px; margin-left:50px;'>
-        <!--         <el-form-item label="类型">
-                   <el-select class="filter-item" v-model="temp.type" placeholder="请选择">
-                     <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key">
-                     </el-option>
-                   </el-select>
-                 </el-form-item>
-
-                 <el-form-item label="状态">
-                   <el-select class="filter-item" v-model="temp.status" placeholder="请选择">
-                     <el-option v-for="item in  statusOptions" :key="item" :label="item" :value="item">
-                     </el-option>
-                   </el-select>
-                 </el-form-item>
-
-                 <el-form-item label="时间">
-                   <el-date-picker v-model="temp.timestamp" type="datetime" placeholder="选择日期时间">
-                   </el-date-picker>
-                 </el-form-item>-->
         <el-form-item label="文章标题">
           <el-input v-model="temp.title"></el-input>
         </el-form-item>
@@ -188,20 +170,7 @@
         </el-form-item>
 
 
-        <!--<el-form-item label="状态">
-          <el-select class="filter-item" v-model="temp.status" placeholder="请选择">
-            <el-option v-for="item in  statusOptions" :key="item" :label="item" :value="item">
-            </el-option>
-          </el-select>
-        </el-form-item>-->
-        <!-- <el-form-item label="重要性">
-          <el-rate style="margin-top:8px;" v-model="temp.importance" :colors="['#99A9BF', '#F7BA2A', '#FF9900']" :max='3'></el-rate>
-        </el-form-item>-->
-        <!--
-        <el-form-item label="点评">
-          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="temp.remark">
-          </el-input>
-        </el-form-item>-->
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -209,16 +178,6 @@
         <el-button v-else type="primary" @click="update">确 定</el-button>
       </div>
     </el-dialog>
-
-    <!--  <el-dialog title="阅读数统计" :visible.sync="dialogPvVisible">
-        <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-          <el-table-column prop="key" label="渠道"> </el-table-column>
-          <el-table-column prop="pv" label="pv"> </el-table-column>
-        </el-table>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="dialogPvVisible = false">确 定</el-button>
-        </span>
-      </el-dialog>-->
 
   </div>
 </template>
@@ -236,19 +195,6 @@
   } from '@/api/post'
   import {getAlltags} from '@/api/tag'
   import {getAllcategoies} from '@/api/category'
-
-  // const calendarTypeOptions = [
-  //   {key: 'CN', display_name: '中国'},
-  //   {key: 'US', display_name: '美国'},
-  //   {key: 'JP', display_name: '日本'},
-  //   {key: 'EU', display_name: '欧元区'}
-  // ]
-  //
-  // // arr to obj
-  // const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-  //   acc[cur.key] = cur.display_name
-  //   return acc
-  // }, {})
 
   export default {
     name: 'complexTable',
@@ -461,7 +407,7 @@
       },
       update() {
         //this.temp.timestamp = +this.temp.timestamp
-        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        //console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         updatePost(this.temp).then(response => {
           console.log(response);
           if (response.status === 200) {

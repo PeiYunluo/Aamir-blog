@@ -42,16 +42,16 @@
       </el-form-item>
       <MarkdownPro @on-save="handleOnSave"
                    :height="800" theme="light"
-                    value="Hello Aamir"
+                   value="Hello Aamir"
                    :bordered="false"
                    :toolbars="{importmd:false}"
                    v-model="PostSaveParam.originalContent"/>
     </el-form>
     <el-button type="primary" @click="onSubmit">Create</el-button>
-<!--    <el-button @click="onCancel">Cancel</el-button>
-    <el-button @click="OnSave"
-               style="width:10%;margin-bottom:30px;">保存
-    </el-button>-->
+    <!--    <el-button @click="onCancel">Cancel</el-button>
+        <el-button @click="OnSave"
+                   style="width:10%;margin-bottom:30px;">保存
+        </el-button>-->
 
     <el-drawer
       title="我是标题"
@@ -59,7 +59,8 @@
       :with-header="false">
       <h3 align="center">图片上传</h3>
       <div>
-        <el-upload v-if="aamirUploadOption.configvalue === 'TRUE'" action="https://upload.qbox.me" :data="dataObj" drag :multiple="true" :before-upload="beforeUpload" align="center"
+        <el-upload v-if="aamirUploadOption.configvalue === 'TRUE'" action="https://upload-z2.qiniup.com" :data="dataObj"
+                   drag :multiple="true" :before-upload="beforeUpload" align="center"
                    :on-success="uploadSuccess">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -69,14 +70,16 @@
       <el-tabs>
         <el-tab-pane label="Copy and Paste" name="directly">
           <el-input v-model="url.configvalue+dataObj.key" placeholder="请输入内容" style='width:200px;'></el-input>
-          <el-button type="primary" icon="document" @click='handleCopy(url.configvalue+dataObj.key,$event)'>copy</el-button>
+          <el-button type="primary" icon="document" @click='handleCopy(url.configvalue+dataObj.key,$event)'>copy
+          </el-button>
         </el-tab-pane>
-        <img v-show="dataObj.key!=''" :src="url.configvalue+dataObj.key+'?imageView2/1/w/320/h/180'" />
+
       </el-tabs>
 
       <h3 align="center">Md文章上传</h3>
       <div>
-        <el-upload action="http://localhost:8090/photo/uploadmarkdown"  drag :multiple="true" :before-upload="beforeUpload" align="center"
+        <el-upload action="http://localhost:8090/photo/uploadmarkdown" drag :multiple="true"
+                   :before-upload="beforeUpload" align="center"
                    :on-success="uploadSuccess">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -100,7 +103,6 @@
   import {findOption} from '@/api/option'
 
 
-
   export default {
     name: "markdown",
     components: {
@@ -113,23 +115,23 @@
     data() {
       return {
         //开关
-        aamirUploadOption:{
-          configfield:"Qiniu",
-          configname:"upload",
-          configvalue:undefined
+        aamirUploadOption: {
+          configfield: "Qiniu",
+          configname: "upload",
+          configvalue: undefined
         },
         //上传
-        url:undefined,
+        url: undefined,
         dataObj: {token: '', key: ''},
         image_uri: [],
         fileList: [],
         //抽屉
         drawer: false,
         //copy
-        option:{
-          configfield:"Qiniu",
-          configname:"url",
-          configvalue:undefined
+        option: {
+          configfield: "Qiniu",
+          configname: "url",
+          configvalue: undefined
         },
 
         radio: 0,
@@ -166,15 +168,15 @@
       '$route': 'getParams'
     },
     methods: {
-      initOption(){
+      initOption() {
         let vm = this
-        findOption(this.aamirUploadOption).then(response=>{
+        findOption(this.aamirUploadOption).then(response => {
           vm.aamirUploadOption.configvalue = response.data.data.configvalue
         })
       },
-      initQiniuUrl(){
+      initQiniuUrl() {
         let vm = this
-        findOption(vm.option).then(response=>{
+        findOption(vm.option).then(response => {
           vm.url = response.data.data
         })
       },
@@ -270,7 +272,7 @@
         })
       },
       uploadSuccess(response, file, fileList) {
-        let vm =this
+        let vm = this
         vm.PostSaveParam.originalContent = response.data
         this.$message({
           message: '上传成功',

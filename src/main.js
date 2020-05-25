@@ -11,6 +11,9 @@ import clipboard from 'clipboard';
 
 
 import formatDate from './utils/formatDate'
+import Antd from 'ant-design-vue';
+Vue.use(Antd)
+
 // 注册为全局过滤器
 Vue.filter('formatDate', formatDate)
 //注册到vue原型上

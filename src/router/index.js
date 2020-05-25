@@ -38,6 +38,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/install',
+    component: () => import('@/views/install/index'),
+    hidden: true
+  },
+  {
     path: '/resetPassword',
     component: () => import('@/views/resetpwd/index'),
     hidden: true

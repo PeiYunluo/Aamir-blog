@@ -38,6 +38,7 @@ const actions = {
         if (response.data.resultCode==401){
           alert("登录失败")
         }
+
         const {data} = response
         console.log(data);
         console.log(data.data.address);
@@ -50,9 +51,7 @@ const actions = {
     })
   },
 
-  //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODM3NTA1MDAsInN1YiI6IntcIm5hbWVcIjpcIm5hbWVcIixcInVzZXJJZFwiOlwidXNlcmlkXCJ9IiwiaXNzIjoieGlleGllIiwiYXVkIjoiSGVsbG8gV29ybGQiLCJleHAiOjE1ODM4MzY5MDAsIm5iZiI6MTU4Mzc1MDUwMH0.doqRs9WxLQkuvtmpIoAA6ecUKcBZcszsz2LIKYJF3KU
-  // {iat=1583750500, sub={"name":"name","userId":"userid"}, iss=xiexie, aud=Hello World, exp=1583836900, nbf=1583750500}
-  // get user info
+
   getInfo({commit, state}) {
     return new Promise((resolve, reject) => {
       getInfobytoken(state.token).then(response => {
