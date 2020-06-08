@@ -48,10 +48,6 @@
                    v-model="PostSaveParam.originalContent"/>
     </el-form>
     <el-button type="primary" @click="onSubmit">Create</el-button>
-    <!--    <el-button @click="onCancel">Cancel</el-button>
-        <el-button @click="OnSave"
-                   style="width:10%;margin-bottom:30px;">保存
-        </el-button>-->
 
     <el-drawer
       title="我是标题"

@@ -1,41 +1,24 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-   <!--   <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签"
-                @input="change($event)" v-model="listQuery.name"/>
-
-
-
-      <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.sort"
-                 placeholder="排序">
-        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
-        </el-option>
-      </el-select>-->
-
- <!--     <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>-->
       <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
                  icon="el-icon-edit">添加
       </el-button>
-      <!--      <el-button class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">导出</el-button>-->
-      <!--<el-button class="filter-item" type="primary" icon="el-icon-download">导出</el-button>-->
       <el-checkbox class="filter-item" style='margin-left:15px;' v-model="isstripe">显示斑马条纹</el-checkbox>
     </div>
 
     <el-table :key='tableKey' :data="list" v-loading="listLoading" element-loading-text="给我一点时间" border fit
               highlight-current-row style="width: 100%" :stripe=isstripe>
-
-      <el-table-column align="center" label="序号" width="40">
+      <el-table-column align="center" label="序号" width="50">
         <template slot-scope="scope">
           <span>{{scope.row.id}}</span>
         </template>
       </el-table-column>
-
       <el-table-column width="100px" align="center" label="url">
         <template slot-scope="scope">
           <span>{{scope.row.url}}</span>
         </template>
       </el-table-column>
-
       <el-table-column min-width="100px" label="标题">
         <template slot-scope="scope">
           <div>
@@ -57,7 +40,6 @@
 
         </template>
       </el-table-column>
-
       <el-table-column width="200px" align="center" label="删除">
         <template slot-scope="scope">
           <el-switch
@@ -80,7 +62,6 @@
             inactive-color="#67C23A"
             @change="handlecommentswitch(scope.row)"
           >
-            <!--@change="handlecommentswitch(scope.row)"-->
           </el-switch>
         </template>
       </el-table-column>
@@ -90,24 +71,6 @@
           <span style='color:red;'><img :src="scope.row.thumbnailurl+'?imageView2/1/w/40/h/40'" height="40" width="40"></span>
         </template>
       </el-table-column>
-
-      <!--    <el-table-column label="重要性">
-          <template slot-scope="scope">
-            <svg-icon v-for="n in +scope.row.id" icon-class="star" class="meta-item__icon" :key="n"></svg-icon>
-          </template>
-        </el-table-column>-->
-
-      <!--   <el-table-column align="center" label="阅读数" width="95">
-           <template slot-scope="scope">
-             <span class="link-type">&lt;!&ndash;@click='handleFetchPv(scope.row.id)'&ndash;&gt;{{scope.row.id}}</span>
-           </template>
-         </el-table-column>-->
-
-      <!--   <el-table-column class-name="status-col" label="状态" width="100">
-           <template slot-scope="scope">
-             <el-tag :type="scope.row.id | statusFilter">{{scope.row.id}}</el-tag>
-           </template>
-         </el-table-column>-->
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
           <el-button v-if="scope.row.status!=0" size="small" type="danger" @click="handlestatusswitch(scope.row)">草稿接口
@@ -277,15 +240,6 @@
         this.listQuery.page = val
         this.getList()
       },
-      /*timeFilter(time) {
-        if (!time[0]) {
-          this.listQuery.start = undefined
-          this.listQuery.end = undefined
-          return
-        }
-        this.listQuery.start = parseInt(+time[0] / 1000)
-        this.listQuery.end = parseInt((+time[1] + 3600 * 1000 * 24) / 1000)
-      },*/
       handleModifyStatus(row, status) {
         this.$message({
           message: '操作成功',

@@ -35,10 +35,9 @@ const actions = {
     const {username, password} = userInfo
     return new Promise((resolve, reject) => {
       logintoken({username: username.trim(), password: password}).then(response => {
-        if (response.data.resultCode==401){
+        if (response.data.resultCode == 401) {
           alert("登录失败")
         }
-
         const {data} = response
         console.log(data);
         console.log(data.data.address);
@@ -62,7 +61,7 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
         console.log(data.data.name);
-        const {name, userId,avatar} = data.data
+        const {name, userId, avatar} = data.data
         console.log(name)
         console.log(avatar)
         commit('SET_NAME', name)

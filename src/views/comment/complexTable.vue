@@ -10,9 +10,6 @@
       </el-select>
 
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>-->
-      <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
-                 icon="el-icon-edit">添加
-      </el-button>
       <el-button class="filter-item" type="primary" icon="el-icon-download">导出</el-button>
       <el-checkbox class="filter-item" style='margin-left:15px;' v-model="isstripe">显示斑马条纹</el-checkbox>
       <el-button class="filter-item" style='margin-left:15px;' @click="HandleQuerydeleted">未删除</el-button>

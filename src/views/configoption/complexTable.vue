@@ -1,7 +1,7 @@
 <template>
   <div class="app-container calendar-list-container">
     <div class="filter-container">
-      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签" @input="change($event)" v-model="listQuery.name"/>
+<!--      <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="标签" @input="change($event)" v-model="listQuery.name"/>-->
 
       <!-- <el-select clearable style="width: 90px" class="filter-item" v-model="listQuery.importance" placeholder="重要性">
          <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item">
@@ -13,18 +13,18 @@
         </el-option>
       </el-select>-->
 
-      <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.sort"
-                 placeholder="排序">
-        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">
-        </el-option>
-      </el-select>
+<!--      <el-select @change='handleFilter' style="width: 120px" class="filter-item" v-model="listQuery.sort"-->
+<!--                 placeholder="排序">-->
+<!--        <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key">-->
+<!--        </el-option>-->
+<!--      </el-select>-->
 
-      <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"
-                 icon="el-icon-edit">添加
-      </el-button>
+<!--      <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>-->
+<!--      <el-button class="filter-item" style="margin-left: 10px;" @click="handleCreate" type="primary"-->
+<!--                 icon="el-icon-edit">添加-->
+<!--      </el-button>-->
       <!--      <el-button class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">导出</el-button>-->
-      <el-button class="filter-item" type="primary" icon="el-icon-download">导出</el-button>
+<!--      <el-button class="filter-item" type="primary" icon="el-icon-download">导出</el-button>-->
       <el-button  @click="display=!display">显示</el-button>
       <el-checkbox class="filter-item" style='margin-left:15px;' v-model="display">value显示</el-checkbox>
       <el-checkbox class="filter-item" style='margin-left:15px;' v-model="isstripe">显示斑马条纹</el-checkbox>

@@ -249,7 +249,12 @@
       },
       install() {
         install(this.installation).then(response => {
-          this.$message.success('安装成功！')
+          console.log(response);
+          if (response.data.resultCode === 400 ){
+            this.$message.error('BadRequest')
+          } else {
+            this.$message.success('安装成功！')
+          }
           setTimeout(() => {
             this.$router.push({ name: 'login' })
           }, 300)

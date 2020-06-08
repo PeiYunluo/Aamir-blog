@@ -6,7 +6,7 @@ import { getToken } from '@/utils/auth'
 //封装axios
 // create an axios instance实例
 const service = axios.create({
-  baseURL: "http://localhost:8090", // url = base url + request url
+  baseURL: "http://10.100.183.244:8090", // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
